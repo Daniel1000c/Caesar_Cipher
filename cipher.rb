@@ -4,20 +4,37 @@ def caesar_cipher(string,shift)
   result = ""
 
   #Loop through each character in the string
+  string.split("").each do |character|
+    #Get current character from the string
+    #Check if character is a letter
+      
+    if character =~ /[[:alpha:]]/
+      #If it is:
+      
+      #Check if base charc code  is uppercase or lowercase
+     base = character == character.upcase ? "A".ord : "a".ord
 
-  #Get current character from the string
-  #Check if character is lowercase letter or uppercase letter
-    #If it is:
-    #Convert letter to character code
-    #Shift letter by shift amount
-    #Wrap character around modulo
-    #Convert said character back to letter
-    #Concat to result string
-  
-  #If character is not a letter, add to result unchanged
-  
+      #Shift letter by shift amount
+      #Wrap character around modulo
+      alphabet_position = character.ord - base
+      shifted_position = (alphabet_position + shift) % 26
+
+       #Convert said character back to letter
+      new_char_code = shifted_position + base
+
+      char_string = new_char_code.chr
+      
+      #Concat to result string
+      result << char_string
+    else 
+      #If character is not a letter, add to result unchanged  
+      result << character 
+    end
+  end
+
   #Return final result string after loop has finished
-  result
+ result
 end
 
-caesar_cipher('Hello',5)
+#Call caesar cipher function
+puts caesar_cipher('What a string!',5)
